@@ -90,7 +90,7 @@ export default {
       hide: true,
       total: 10,
       currentPage: 1,
-      pageSize: 5,
+      pageSize: 10,
       userInfo: false, // 用户个人信息弹出层
       form: {}
     }
