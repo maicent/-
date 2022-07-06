@@ -95,7 +95,7 @@ export const constantRoutes = [{
   children: [{
     path: 'hypergryph',
     name: '官服导入',
-    component: () => import('@/views/import/index'),
+    component: () => import('@/views/import/import'),
     meta: {
       title: '官服导入',
       icon: 'form'
