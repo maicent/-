@@ -50,3 +50,12 @@ export function importData(data) {
     data
   })
 }
+
+// B服导入
+export function importDatafromB(data) {
+  return request({
+    url: '/importbyB',
+    method: 'post',
+    data
+  })
+}

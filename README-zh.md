@@ -9,28 +9,32 @@
 </p>
 <p align="center">
    <a href="http://arkdb.maicent.top" title="明日方舟抽卡数据库" target="_blank">
-      <img height="200px" src="https://i.postimg.cc/pLJBzfyd/image.png" title="明日方舟抽卡数据库">
+      <img height="200px" src="https://gitee.com/maicent1/ark-db/raw/master/src/assets/prv.png" title="明日方舟抽卡数据库">
    </a>
 </p>
 
 
-## 目前功能
+## 功能一览
 
-- 抽卡数据导入和储存
+- [ ]抽卡数据导入和储存
 
-- 饼图星级分析
+- [ ]B服寻访数据导入
 
-- 最近六星
+- [ ]饼图星级分析
 
-- 所有寻访列表
+- [ ]最近六星
 
-- 卡池分析
+- [ ]所有寻访列表
 
-- 管理员相关功能（用户管理等）
+- [ ]卡池分析
+
+- [ ]管理员相关功能（用户管理等）
+
+- [x]模拟寻访
 
 ## Features
 
-- B服寻访数据导入
+- [x]B服寻访数据导入
 
 - 模拟寻访
   

@@ -46,7 +46,8 @@
 </template>
 
 <script>
-
+import { importDatafromB } from '@/api/gacha'
+import { Loading } from 'element-ui'
 export default {
   data() {
     return {
@@ -66,10 +67,23 @@ export default {
       if (this.active-- < 1) this.active = 1
     },
     importData() {
+      Loading.service({ fullscreen: true })
       if (this.form.content.length < 10) {
         this.$message.error('输入格式不正确')
       } else {
-        this.$message.error('别急！很快就能完成了！')
+        importDatafromB({ 'arktoken': encodeURIComponent(this.form.content) }).then(response => {
+          if (response.code === '200') {
+            this.fail = response.data.flist
+            this.success = response.data.slist
+            this.$message('成功!')
+          } else {
+            this.$message({
+              message: '导入失败!',
+              type: 'warning'
+            })
+          }
+          Loading.service({ fullscreen: true }).close()
+        })
       }
     }
   }
