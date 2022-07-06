@@ -86,12 +86,26 @@ export const constantRoutes = [{
 {
   path: '/import',
   component: Layout,
+  redirect: '/import/hypergryph',
+  name: '数据导入',
+  meta: {
+    title: '数据导入',
+    icon: 'el-icon-s-help'
+  },
   children: [{
-    path: 'import',
-    name: '导入',
-    component: () => import('@/views/form/index'),
+    path: 'hypergryph',
+    name: '官服导入',
+    component: () => import('@/views/import/index'),
     meta: {
-      title: '导入数据',
+      title: '官服导入',
+      icon: 'form'
+    }
+  }, {
+    path: 'bilibili',
+    name: 'B服导入',
+    component: () => import('@/views/import/bilibili/index'),
+    meta: {
+      title: 'B服导入',
       icon: 'form'
     }
   }]

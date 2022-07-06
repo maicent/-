@@ -35,6 +35,18 @@ Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
+router.afterEach((to, from, next) => {
+  setTimeout(() => {
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement('script')
+      hm.src = 'https://hm.baidu.com/hm.js?91cf479db1786bdbaf120c8100c7f204'
+      var s = document.getElementsByTagName('script')[0]
+      s.parentNode.insertBefore(hm, s)
+    })()
+  }, 0)
+})
+
 new Vue({
   el: '#app',
   router,
