@@ -9,7 +9,7 @@
 </p>
 <p align="center">
    <a href="http://arkdb.maicent.top" title="明日方舟抽卡数据库" target="_blank">
-      <img height="200px" src="https://postimg.cc/mPhMGFYx" title="明日方舟抽卡数据库">
+      <img height="200px" src="https://i.postimg.cc/pLJBzfyd/image.png" title="明日方舟抽卡数据库">
    </a>
 </p>
 
