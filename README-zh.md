@@ -1,52 +1,49 @@
-# vue-admin-template
+# 明日方舟抽卡数据库
 
-> 这是一个极简的 vue admin 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint，这些搭建后台必要的东西。
+> 这是一个可以[永久]储存明日方舟抽卡记录的项目（官网只能储存最近1月内的100抽）并且附带些简单的分析工具
 
-[线上地址](http://panjiachen.github.io/vue-admin-template)
-
-[国内访问](https://panjiachen.gitee.io/vue-admin-template)
-
-目前版本为 `v4.0+` 基于 `vue-cli` 进行构建，若你想使用旧版本，可以切换分支到[tag/3.11.0](https://github.com/PanJiaChen/vue-admin-template/tree/tag/3.11.0)，它不依赖 `vue-cli`。
+[线上地址](http://arkdb.maicent.top)
 
 <p align="center">
-  <b>SPONSORED BY</b>
+  <b>项目预览</b>
 </p>
 <p align="center">
-   <a href="https://finclip.com?from=vue_element" title="FinClip" target="_blank">
-      <img height="200px" src="https://gitee.com/panjiachen/gitee-cdn/raw/master/vue%E8%B5%9E%E5%8A%A9.png" title="FinClip">
+   <a href="http://arkdb.maicent.top" title="明日方舟抽卡数据库" target="_blank">
+      <img height="200px" src="https://postimg.cc/mPhMGFYx" title="明日方舟抽卡数据库">
    </a>
 </p>
 
-## Extra
 
-如果你想要根据用户角色来动态生成侧边栏和 router，你可以使用该分支[permission-control](https://github.com/PanJiaChen/vue-admin-template/tree/permission-control)
+## 目前功能
 
-## 相关项目
+- 抽卡数据导入和储存
 
-- [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+- 饼图星级分析
 
-- [electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin)
+- 最近六星
 
-- [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template)
+- 所有寻访列表
 
-- [awesome-project](https://github.com/PanJiaChen/vue-element-admin/issues/2312)
+- 卡池分析
 
-写了一个系列的教程配套文章，如何从零构建后一个完整的后台项目:
+- 管理员相关功能（用户管理等）
 
-- [手摸手，带你用 vue 撸后台 系列一(基础篇)](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
-- [手摸手，带你用 vue 撸后台 系列二(登录权限篇)](https://juejin.im/post/591aa14f570c35006961acac)
-- [手摸手，带你用 vue 撸后台 系列三 (实战篇)](https://juejin.im/post/593121aa0ce4630057f70d35)
-- [手摸手，带你用 vue 撸后台 系列四(vueAdmin 一个极简的后台基础模板,专门针对本项目的文章,算作是一篇文档)](https://juejin.im/post/595b4d776fb9a06bbe7dba56)
-- [手摸手，带你封装一个 vue component](https://segmentfault.com/a/1190000009090836)
+## Features
+
+- B服寻访数据导入
+
+- 模拟寻访
+  
+- 还没想好，期待建议
 
 ## Build Setup
 
 ```bash
 # 克隆项目
-git clone https://github.com/PanJiaChen/vue-admin-template.git
+git clone https://gitee.com/maicent1/ark-db.git
 
 # 进入项目目录
-cd vue-admin-template
+cd ark-db
 
 # 安装依赖
 npm install
@@ -56,6 +53,8 @@ npm install --registry=https://registry.npm.taobao.org
 
 # 启动服务
 npm run dev
+
+在vue.config.js中的proxy中把本地后端接口改为线上后端接口 http://arkdb.maicent.top/api (后端会在后面再开源)
 ```
 
 浏览器访问 [http://localhost:9528](http://localhost:9528)
@@ -86,26 +85,10 @@ npm run lint
 npm run lint -- --fix
 ```
 
-更多信息请参考 [使用文档](https://panjiachen.github.io/vue-element-admin-site/zh/)
+## 开发团队
 
-## 购买贴纸
+-麦创软件设计工作室
 
-你也可以通过 购买[官方授权的贴纸](https://smallsticker.com/product/vue-element-admin) 的方式来支持 vue-element-admin - 每售出一张贴纸，我们将获得 2 元的捐赠。
+## 开源组件
 
-## Demo
-
-![demo](https://github.com/PanJiaChen/PanJiaChen.github.io/blob/master/images/demo.gif)
-
-## Browsers support
-
-Modern browsers and Internet Explorer 10+.
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| --------- | --------- | --------- | --------- |
-| IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions
-
-## License
-
-[MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
-
-Copyright (c) 2017-present PanJiaChen
+[vue-element-admin](https://panjiachen.gitee.io/vue-element-admin-site/zh/)
