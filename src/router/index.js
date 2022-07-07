@@ -69,16 +69,15 @@ export const constantRoutes = [{
     component: () => import('@/views/statistic/pool/index'),
     meta: {
       title: '卡池分析',
-      icon: 'table'
+      icon: 'el-icon-pie-chart'
     }
-  },
-  {
-    path: 'tree',
-    name: '待开发',
-    component: () => import('@/views/tree/index'),
+  }, {
+    path: 'count',
+    name: '抽卡计算器',
+    component: () => import('@/views/count/index'),
     meta: {
-      title: '待开发',
-      icon: 'tree'
+      title: '抽卡计算器',
+      icon: 'el-icon-s-platform'
     }
   }
   ]
@@ -90,7 +89,7 @@ export const constantRoutes = [{
   name: '数据导入',
   meta: {
     title: '数据导入',
-    icon: 'el-icon-s-help'
+    icon: 'el-icon-upload'
   },
   children: [{
     path: 'hypergryph',
@@ -135,26 +134,6 @@ export const constantRoutes = [{
  * 动态路由
  */
 export const asyncRoutes = [{
-  path: '/example',
-  component: Layout,
-  redirect: '/example/table',
-  name: 'Example',
-  meta: {
-    title: 'Example',
-    icon: 'el-icon-s-help',
-    roles: ['editor']
-  },
-  children: [{
-    path: 'tree',
-    name: 'Tree',
-    component: () => import('@/views/tree/index'),
-    meta: {
-      title: 'Tree',
-      icon: 'tree'
-    }
-  }
-  ]
-}, {
   path: '/admin',
   component: Layout,
   redirect: '/admin/user',

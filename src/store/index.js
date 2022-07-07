@@ -7,6 +7,8 @@ import user from './modules/user'
 
 // 添加permission
 import permission from './modules/permission'
+// 添加errorlog
+import errorLog from './modules/errorLog'
 
 Vue.use(Vuex)
 
@@ -15,9 +17,9 @@ const store = new Vuex.Store({
     app,
     settings,
     user,
-
     // 添加permission
-    permission
+    permission,
+    errorLog
   },
   getters
 })

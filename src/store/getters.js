@@ -8,6 +8,8 @@ const getters = {
   // 添加roles
   roles: state => state.user.roles,
   // 动态路由
-  permission_routes: state => state.permission.routes
+  permission_routes: state => state.permission.routes,
+  // 错误
+  errorLogs: state => state.errorLog.logs
 }
 export default getters
