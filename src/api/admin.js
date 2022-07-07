@@ -7,3 +7,11 @@ export function userList(params) {
     params
   })
 }
+
+export function allGachaList(params) {
+  return request({
+    url: '/admin/gachaList',
+    method: 'get',
+    params
+  })
+}

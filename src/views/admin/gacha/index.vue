@@ -7,43 +7,37 @@
       border
       fit
       highlight-current-row
+      :row-class-name="tableRowClassName"
     >
-      <el-table-column align="center" label="ID" width="95">
-        <template slot-scope="scope">
-          {{ scope.row.uid }}
-        </template>
-      </el-table-column>
       <el-table-column label="用户名" align="center">
         <template slot-scope="scope">
           {{ scope.row.user }}
         </template>
       </el-table-column>
-      <el-table-column label="IP" align="center">
+      <el-table-column label="干员名称" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.ip }}</span>
+          {{ scope.row.name }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="用户组" align="center">
+      <el-table-column label="池子" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.state | stateFilter">{{ scope.row.state }}</el-tag>
+          <span>{{ scope.row.pool }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="登录时间">
+      <el-table-column label="星级" align="center">
+        <template slot-scope="scope">
+          {{ parseInt(scope.row.rarity)+1 | toChinese }}
+        </template>
+      </el-table-column>
+      <el-table-column label="NEW" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.isnew }}
+        </template>
+      </el-table-column>
+      <el-table-column align="center" prop="created_at" label="时间">
         <template slot-scope="scope">
           <i class="el-icon-time" />
-          <span>{{ scope.row.time }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="注册时间">
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span>{{ scope.row.date }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="操作" fixed="right">
-        <template slot-scope="scope">
-          <el-button size="mini" @click="handleClick(scope.row)">查看</el-button>
-          <el-button size="mini" @click="userInfo = true;form = scope.row">编辑</el-button>
+          <span>{{ parseInt(scope.row.ts) | formatDate }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -70,17 +64,38 @@
 </template>
 
 <script>
-import { userList } from '@/api/admin'
+import { allGachaList } from '@/api/admin'
 
 export default {
   filters: {
-    stateFilter(status) {
-      const statusMap = {
-        admin: 'success',
-        user: 'gray',
-        deleted: 'danger'
+    formatDate: function(value) {
+      const date = new Date(value * 1000)
+      const y = date.getFullYear()
+      let MM = date.getMonth() + 1
+      MM = MM < 10 ? ('0' + MM) : MM
+      let d = date.getDate()
+      d = d < 10 ? ('0' + d) : d
+      let h = date.getHours()
+      h = h < 10 ? ('0' + h) : h
+      let m = date.getMinutes()
+      m = m < 10 ? ('0' + m) : m
+      let s = date.getSeconds()
+      s = s < 10 ? ('0' + s) : s
+      return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s
+    },
+    toChinese(val) {
+      const chin = ['一星', '二星', '三星', '四星', '五星', '六星', '七星', '八星', '九星', '十星']
+      if (val <= 10) {
+        return chin[val - 1]
+      } else if (val <= 100) {
+        if (val < 20) {
+          return '十' + chin[(val % 10) - 1]
+        } else if (val % 10 === 0) {
+          return chin[Math.floor(val / 10) - 1] + '十'
+        } else {
+          return chin[Math.floor(val / 10) - 1] + '十' + chin[(val % 10) - 1]
+        }
       }
-      return statusMap[status]
     }
   },
   data() {
@@ -90,7 +105,7 @@ export default {
       hide: true,
       total: 10,
       currentPage: 1,
-      pageSize: 5,
+      pageSize: 10,
       userInfo: false, // 用户个人信息弹出层
       form: {}
     }
@@ -102,7 +117,7 @@ export default {
     fetchData() {
       const data = { pageNo: this.currentPage, pageSize: this.pageSize }
       this.listLoading = true
-      userList(data).then(response => {
+      allGachaList(data).then(response => {
         this.total = Number(response.data.totalRecords)
         this.list = response.data.data
         this.listLoading = false
@@ -115,10 +130,17 @@ export default {
     handleClick(row) {
       console.log(row)
     },
-    isFalse(d) {
-      if (d) return true
-      return false
+    tableRowClassName({ row }) {
+      if (row.rarity === '5') {
+        return 'warning-row'
+      }
+      return ''
     }
   }
 }
 </script>
+<style scoped>
+.el-table__row .current-row .warning-row {
+  background: oldlace;
+}
+</style>
