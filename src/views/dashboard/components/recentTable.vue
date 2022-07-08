@@ -89,14 +89,14 @@ export default {
       let num = 0
       gachaList(data).then(response => {
         this.total = Number(response.data.totalRecords)
-        for (const i in response.data.data) {
+        for (const i in response.data.data.reverse()) {
           if (response.data.data[i].rarity === '5') {
             response.data.data[i].num = i - num
             recent.unshift(response.data.data[i])
             num = parseInt(i)
           }
         }
-        this.list = recent.reverse()
+        this.list = recent
         this.listLoading = false
       })
     },
