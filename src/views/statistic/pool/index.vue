@@ -54,7 +54,6 @@ export default {
   methods: {
     async getData() {
       await pool().then(res => {
-        this.pie = res.data.data
         this.sixdata = res.data.data.map(list => list.six)
         this.ydata = res.data.data.map(list => list.pool)
         this.xdata = res.data.data.map(list => list.num)
@@ -64,6 +63,7 @@ export default {
     initChart() {
       this.chart = echarts.init(document.getElementById('main'), 'macarons')
       console.log(this.sixdata)
+      console.log(this.ydata)
       this.chart.setOption({
         xAxis: {
           max: 'dataMax'
@@ -77,7 +77,6 @@ export default {
         },
         series: [
           {
-            realtimeSort: true,
             name: '卡池抽取数量',
             type: 'bar',
             data: this.xdata,
@@ -88,7 +87,6 @@ export default {
             }
           },
           {
-            realtimeSort: true,
             name: '六星数量',
             type: 'bar',
             data: this.sixdata,
