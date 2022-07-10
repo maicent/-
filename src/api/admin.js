@@ -15,3 +15,11 @@ export function allGachaList(params) {
     params
   })
 }
+
+export function getNotice(params) {
+  return request({
+    url: '/admin/notice',
+    method: 'get',
+    params
+  })
+}
