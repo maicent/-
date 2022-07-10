@@ -38,7 +38,7 @@
       </div>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
-      <el-button :loading="loading" style="width:100%;margin-bottom:30px;margin-left:0" @click.native.prevent="reg">注册</el-button>
+      <el-button style="width:100%;margin-bottom:30px;margin-left:0" @click.native.prevent="reg">注册</el-button>
 
     </el-form>
     <el-dialog
