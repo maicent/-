@@ -109,15 +109,17 @@ export const constantRoutes = [{
     }
   }]
 },
-
 {
-  path: '反馈',
+  path: '/about',
   component: Layout,
+  redirect: '/about',
   children: [{
-    path: 'https://jq.qq.com/?_wv=1027&k=K5EBeaBg',
+    path: 'about',
+    name: '反馈',
+    component: () => import('@/views/about/index'),
     meta: {
       title: '反馈',
-      icon: 'link'
+      icon: 'el-icon-question'
     }
   }]
 }
