@@ -1,5 +1,13 @@
 <template>
   <div class="app-container">
+    <div class="filter-container">
+      <el-input v-model="listQuery.user" placeholder="用户" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="listQuery.pool" placeholder="卡池" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+        搜索
+      </el-button>
+    </div>
+
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -41,7 +49,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination :hide-on-single-page="hide" :page-size="pageSize" layout="total,prev, pager, next" :total="total" :current-page="currentPage" @current-change="handleCurrentChange" />
+    <el-pagination :hide-on-single-page="hide" :page-size="listQuery.pageSize" layout="total,prev, pager, next" :total="total" :current-page="listQuery.pageNo" @current-change="handleCurrentChange" />
 
     <el-dialog title="用户信息" :visible.sync="userInfo">
       <el-form :model="form">
@@ -104,10 +112,15 @@ export default {
       listLoading: true,
       hide: true,
       total: 10,
-      currentPage: 1,
-      pageSize: 10,
+
       userInfo: false, // 用户个人信息弹出层
-      form: {}
+      form: {},
+      listQuery: {
+        pageNo: 1,
+        pageSize: 10,
+        user: '',
+        pool: ''
+      }
     }
   },
   created() {
@@ -115,20 +128,23 @@ export default {
   },
   methods: {
     fetchData() {
-      const data = { pageNo: this.currentPage, pageSize: this.pageSize }
       this.listLoading = true
-      allGachaList(data).then(response => {
+      allGachaList(this.listQuery).then(response => {
         this.total = Number(response.data.totalRecords)
         this.list = response.data.data
         this.listLoading = false
       })
     },
     handleCurrentChange(val) {
-      this.currentPage = val
+      this.listQuery.pageNo = val
       this.fetchData()
     },
     handleClick(row) {
       console.log(row)
+    },
+    handleFilter() {
+      this.listQuery.pageNo = 1
+      this.fetchData()
     },
     tableRowClassName({ row }) {
       if (row.rarity === '5') {
@@ -142,5 +158,9 @@ export default {
 <style scoped>
 .el-table__row .current-row .warning-row {
   background: oldlace;
+}
+
+.filter-container{
+  padding-bottom: 10px;
 }
 </style>
