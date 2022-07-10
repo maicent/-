@@ -33,13 +33,28 @@
         </span>
       </el-form-item>
 
+      <div class="tips">
+        <el-link type="primary" icon="el-icon-edit" style="margin-right:20px;" @click="dialogVisible = true">登录代表同意用户协议</el-link>
+      </div>
+
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
       <el-button :loading="loading" style="width:100%;margin-bottom:30px;margin-left:0" @click.native.prevent="reg">注册</el-button>
-      <!-- <div class="tips">
-        <el-link type="primary" icon="el-icon-edit" href="./reg" style="margin-right:20px;">注册</el-link>
-      </div> -->
 
     </el-form>
+    <el-dialog
+      title="用户协议"
+      :visible.sync="dialogVisible"
+      width="40%"
+      :before-close="handleClose"
+    >
+      <span>1、本网站仅为用户自愿在本站存储数据，用户行为与本站无关</span><br>
+      <span>2、本站只利用前端开源技术为用户提供基本的分析服务，不会将数据共享给第三方，更不会使用数据做其他用途</span><br>
+      <span>3、如有侵权请联系管理员maicent AT QQ dot com</span><br>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -66,7 +81,8 @@ export default {
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      dialogVisible: false
     }
   },
   watch: {
@@ -108,7 +124,18 @@ export default {
     },
     reg() {
       this.$router.push({ path: '/reg' })
+    },
+    xieyi() {
+      console.log('sss')
+    },
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done()
+        })
+        .catch(_ => {})
     }
+
   }
 }
 </script>
