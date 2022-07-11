@@ -154,6 +154,14 @@ export const asyncRoutes = [{
       icon: 'tree'
     }
   }, {
+    path: 'notice',
+    name: '发布公告',
+    component: () => import('@/views/admin/notice/index'),
+    meta: {
+      title: '发布公告',
+      icon: 'el-icon-chat-dot-square'
+    }
+  }, {
     path: 'gacha',
     name: '寻访管理管理',
     component: () => import('@/views/admin/gacha/index'),

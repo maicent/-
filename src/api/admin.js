@@ -23,3 +23,11 @@ export function getNotice(params) {
     params
   })
 }
+
+export function updataNotice(data) {
+  return request({
+    url: '/admin/upNotice',
+    method: 'post',
+    data
+  })
+}
