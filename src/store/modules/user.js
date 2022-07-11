@@ -50,11 +50,9 @@ const actions = {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log(state.rolses)
       getInfo(state.token).then(response => {
         const jwt = require('jsonwebtoken')
         const str = jwt.decode(state.token)
-        console.log(state.token)
 
         const { data } = response
 
