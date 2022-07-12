@@ -72,6 +72,14 @@ export const constantRoutes = [{
       icon: 'el-icon-pie-chart'
     }
   }, {
+    path: 'allpool',
+    name: '全站卡池统计',
+    component: () => import('@/views/statistic/allpool/index'),
+    meta: {
+      title: '全站卡池统计',
+      icon: 'el-icon-data-line'
+    }
+  }, {
     path: 'count',
     name: '抽卡计算器',
     component: () => import('@/views/count/index'),

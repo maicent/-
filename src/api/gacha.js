@@ -59,3 +59,21 @@ export function importDatafromB(data) {
     data
   })
 }
+
+// 获取卡池名称
+export function getPoolName(params) {
+  return request({
+    url: '/gacha/getPoolName',
+    method: 'get',
+    params
+  })
+}
+
+// 根据卡池名称获取数据
+export function getPoolbyName(data) {
+  return request({
+    url: '/gacha/getPoolbyName',
+    method: 'post',
+    data
+  })
+}
