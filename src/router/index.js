@@ -30,114 +30,115 @@ import Layout from '@/layout'
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
-export const constantRoutes = [{
-  path: '/login',
-  component: () => import('@/views/login/index'),
-  hidden: true
-},
-{
-  path: '/reg',
-  component: () => import('@/views/reg/index'),
-  hidden: true
-},
-{
-  path: '/',
-  component: Layout,
-  redirect: '/dashboard',
-  children: [{
-    path: 'dashboard',
-    name: 'Dashboard',
-    component: () => import('@/views/dashboard/index'),
-    meta: {
-      title: '控制台',
-      icon: 'dashboard'
-    }
-  }]
-},
-{
-  path: '/statistic',
-  component: Layout,
-  redirect: '/statistic/pool',
-  name: '数据分析',
-  meta: {
-    title: '数据分析',
-    icon: 'el-icon-s-help'
+export const constantRoutes = [
+  {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
   },
-  children: [{
-    path: 'pool',
-    name: '卡池分析',
-    component: () => import('@/views/statistic/pool/index'),
+  {
+    path: '/reg',
+    component: () => import('@/views/reg/index'),
+    hidden: true
+  },
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: {
+        title: '控制台',
+        icon: 'dashboard'
+      }
+    }]
+  },
+  {
+    path: '/statistic',
+    component: Layout,
+    redirect: '/statistic/pool',
+    name: '数据分析',
     meta: {
-      title: '卡池分析',
-      icon: 'el-icon-pie-chart'
+      title: '数据分析',
+      icon: 'el-icon-s-help'
+    },
+    children: [{
+      path: 'pool',
+      name: '卡池分析',
+      component: () => import('@/views/statistic/pool/index'),
+      meta: {
+        title: '卡池分析',
+        icon: 'el-icon-pie-chart'
+      }
+    }, {
+      path: 'allpool',
+      name: '全站卡池统计',
+      component: () => import('@/views/statistic/allpool/index'),
+      meta: {
+        title: '全站卡池统计',
+        icon: 'el-icon-data-line'
+      }
+    }, {
+      path: 'count',
+      name: '抽卡计算器',
+      component: () => import('@/views/count/index'),
+      meta: {
+        title: '抽卡计算器',
+        icon: 'el-icon-s-platform'
+      }
     }
-  }, {
-    path: 'allpool',
-    name: '全站卡池统计',
-    component: () => import('@/views/statistic/allpool/index'),
+    ]
+  },
+  {
+    path: '/import',
+    component: Layout,
+    redirect: '/import/hypergryph',
+    name: '数据导入',
     meta: {
-      title: '全站卡池统计',
-      icon: 'el-icon-data-line'
-    }
-  }, {
-    path: 'count',
-    name: '抽卡计算器',
-    component: () => import('@/views/count/index'),
-    meta: {
-      title: '抽卡计算器',
-      icon: 'el-icon-s-platform'
-    }
+      title: '数据导入',
+      icon: 'el-icon-upload'
+    },
+    children: [{
+      path: 'hypergryph',
+      name: '官服导入',
+      component: () => import('@/views/import/import'),
+      meta: {
+        title: '官服导入',
+        icon: 'form'
+      }
+    }, {
+      path: 'bilibili',
+      name: 'B服导入',
+      component: () => import('@/views/import/bilibili/index'),
+      meta: {
+        title: 'B服导入',
+        icon: 'form'
+      }
+    }]
+  },
+  {
+    path: '/about',
+    component: Layout,
+    redirect: '/about',
+    children: [{
+      path: 'about',
+      name: '反馈',
+      component: () => import('@/views/about/index'),
+      meta: {
+        title: '反馈',
+        icon: 'el-icon-question'
+      }
+    }]
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404'),
+    hidden: true
   }
-  ]
-},
-{
-  path: '/import',
-  component: Layout,
-  redirect: '/import/hypergryph',
-  name: '数据导入',
-  meta: {
-    title: '数据导入',
-    icon: 'el-icon-upload'
-  },
-  children: [{
-    path: 'hypergryph',
-    name: '官服导入',
-    component: () => import('@/views/import/import'),
-    meta: {
-      title: '官服导入',
-      icon: 'form'
-    }
-  }, {
-    path: 'bilibili',
-    name: 'B服导入',
-    component: () => import('@/views/import/bilibili/index'),
-    meta: {
-      title: 'B服导入',
-      icon: 'form'
-    }
-  }]
-},
-{
-  path: '/about',
-  component: Layout,
-  redirect: '/about',
-  children: [{
-    path: 'about',
-    name: '反馈',
-    component: () => import('@/views/about/index'),
-    meta: {
-      title: '反馈',
-      icon: 'el-icon-question'
-    }
-  }]
-}
 
-  // 404 page must be placed at the end !!!
-  // {
-  //   path: '*',
-  //   redirect: '/404',
-  //   hidden: true
-  // }
 ]
 
 /**
@@ -179,16 +180,15 @@ export const asyncRoutes = [{
     }
   }]
 },
-// 404 页面必须放置在最后一个页面
+// 404 page must be placed at the end !!!
 {
   path: '*',
   redirect: '/404',
   hidden: true
-}
-]
+}]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history', // require service support
   scrollBehavior: () => ({
     y: 0
   }),

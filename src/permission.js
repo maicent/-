@@ -36,16 +36,14 @@ router.beforeEach(async(to, from, next) => {
           // get user info
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
           const { roles } = await store.dispatch('user/getInfo')
-          console.log(roles)
-          // generate accessible routes map based on roles
+          // 得到roles 进行 获取用户路由权限, 得到了需要显示的路由
           const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
-          // dynamically add accessible routes
+          // 然后动态添加可以访问的路由
           router.options.routes = constantRoutes.concat(accessRoutes)
-          router.addRoutes(accessRoutes)
-
-          // hack method to ensure that addRoutes is complete
-          // set the replace: true, so the navigation will not leave a history record
-          next()
+          await router.addRoutes(accessRoutes)
+          // hack 方法确保addroutes 完成
+          // 设置replace:true  导航不会留下历史记录
+          next({ ...to, replace: true })
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
