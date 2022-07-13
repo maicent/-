@@ -43,7 +43,6 @@ import { gachaList } from '@/api/gacha'
 // import { formateDate } from '@/utils/date'
 export default {
   filters: {
-
     formatDate: function(value) {
       const date = new Date(value * 1000)
       const y = date.getFullYear()
@@ -73,7 +72,7 @@ export default {
       hide: true,
       list: null,
       listLoading: true,
-      total: 10,
+      total: 0,
       currentPage: 1,
       pageSize: 5
     }
@@ -87,15 +86,17 @@ export default {
       const data = { pageNo: this.currentPage, pageSize: this.pageSize }
       const recent = []
       let num = 0
+      let advance = 0 // 垫的次数
       gachaList(data).then(response => {
-        this.total = Number(response.data.totalRecords)
         for (const i in response.data.data.reverse()) {
           if (response.data.data[i].rarity === '5') {
             response.data.data[i].num = i - num
             recent.unshift(response.data.data[i])
             num = parseInt(i)
+            advance = parseInt(response.data.data.length - parseInt(i))
           }
         }
+        recent.unshift({ name: '？？？', pool: '？？？', num: '已垫' + advance, isnew: '？', ts: new Date().valueOf() / 1000 })
         this.list = recent
         this.listLoading = false
       })
