@@ -32,6 +32,19 @@
         </span>
       </el-form-item>
 
+      <el-form-item prop="verifyCodeActual">
+        <el-popover
+          placement="bottom"
+          width="144"
+          title="点击更换图片"
+          trigger="click"
+        >
+          <img id="img-vcode" :src="src" @click="getImage">
+
+          <el-input slot="reference" ref="verifyCodeActual" v-model="loginForm.verifyCodeActual" placeholder="请输入验证码" name="verifyCodeActual" type="text" tabindex="1" auto-complete="off" />
+        </el-popover>
+      </el-form-item>
+
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleReg">注册</el-button>
 
     </el-form>
@@ -45,26 +58,42 @@ export default {
   name: 'Login',
   data() {
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 4) {
-        callback(new Error('密码不得小于4位数'))
+      if (value.length < 6) {
+        callback(new Error('密码不得小于6位数'))
       } else {
         callback()
       }
     }
+    const validateCode = (rule, value, callback) => {
+      if (value) {
+        callback()
+      } else {
+        callback(new Error('验证码不能为空'))
+      }
+    }
     return {
+      src: '',
       loginForm: {
         username: '',
-        password: ''
+        password: '',
+        verifyCodeActual: ''
       },
       loginRules: {
         // username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
+        verifyCodeActual: [{ required: true, trigger: 'blur', validator: validateCode }]
       },
       loading: false,
       passwordType: 'password'
     }
   },
+  created() {
+    this.getImage()// 获取验证码
+  },
   methods: {
+    getImage() { // 获取验证码
+      this.src = process.env.VUE_APP_BASE_API + '/kaptcha?ts=' + new Date().valueOf()
+    },
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''

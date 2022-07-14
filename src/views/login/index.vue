@@ -33,6 +33,19 @@
         </span>
       </el-form-item>
 
+      <el-form-item prop="verifyCodeActual">
+        <el-popover
+          placement="bottom"
+          width="144"
+          title="点击更换图片"
+          trigger="click"
+        >
+          <img id="img-vcode" :src="src" @click="getImage">
+
+          <el-input slot="reference" ref="verifyCodeActual" v-model="loginForm.verifyCodeActual" placeholder="请输入验证码" name="verifyCodeActual" type="text" tabindex="1" auto-complete="off" />
+        </el-popover>
+      </el-form-item>
+
       <div class="tips">
         <el-link type="primary" icon="el-icon-edit" style="margin-right:20px;" @click="dialogVisible = true">登录代表同意用户协议</el-link>
       </div>
@@ -41,12 +54,7 @@
       <el-button style="width:100%;margin-bottom:30px;margin-left:0" @click.native.prevent="reg">注册</el-button>
 
     </el-form>
-    <el-dialog
-      title="用户协议"
-      :visible.sync="dialogVisible"
-      width="40%"
-      :before-close="handleClose"
-    >
+    <el-dialog title="用户协议" :visible.sync="dialogVisible" width="40%" :before-close="handleClose">
       <span>1、本网站仅为用户自愿在本站存储数据，用户行为与本站无关</span><br>
       <span>2、本站只利用前端开源技术为用户提供基本的分析服务，不会将数据共享给第三方，更不会使用数据做其他用途</span><br>
       <span>3、如有侵权请联系管理员maicent AT QQ dot com</span><br>
@@ -55,34 +63,44 @@
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
+
   </div>
 </template>
 
 <script>
-
+// import { getKaptcha } from '@/api/user'
 export default {
   name: 'Login',
   data() {
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 4) {
-        callback(new Error('The password can not be less than 6 digits'))
+      if (value.length < 6) {
+        callback(new Error('密码不能小于6位'))
       } else {
         callback()
+      }
+    }
+    const validateCode = (rule, value, callback) => {
+      if (value) {
+        callback()
+      } else {
+        callback(new Error('验证码不能为空'))
       }
     }
     return {
       loginForm: {
         username: '',
-        password: ''
+        password: '',
+        verifyCodeActual: ''
       },
       loginRules: {
-        // username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        verifyCodeActual: [{ required: true, trigger: 'blur', validator: validateCode }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,
       passwordType: 'password',
       redirect: undefined,
-      dialogVisible: false
+      dialogVisible: false,
+      src: ''
     }
   },
   watch: {
@@ -93,7 +111,13 @@ export default {
       immediate: true
     }
   },
+  created() {
+    this.getImage()// 获取验证码
+  },
   methods: {
+    getImage() { // 获取验证码
+      this.src = process.env.VUE_APP_BASE_API + '/kaptcha?ts=' + new Date().valueOf()
+    },
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
