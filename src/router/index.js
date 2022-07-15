@@ -119,8 +119,6 @@ export const constantRoutes = [
     }]
   },
   {
-<<<<<<< HEAD
-=======
     path: '/user',
     component: Layout,
     redirect: '/user/updata',
@@ -148,7 +146,6 @@ export const constantRoutes = [
     }]
   },
   {
->>>>>>> 8d310bb (Try to fix the error)
     path: '/about',
     component: Layout,
     redirect: '/about',
