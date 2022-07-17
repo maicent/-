@@ -4,13 +4,23 @@
 
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="24" style="padding:0px 16px 16px">
-        <el-alert
+        <div v-if="systemMsg.length > 0" class="bs-sysMsg">
+          <i class="el-alert__icon el-icon-warning" />
+          <div class="msg__content">
+            <el-carousel height="20px" direction="vertical" indicator-position="none" :autoplay="true">
+              <el-carousel-item v-for="item in systemMsg" :key="item.id">
+                <a href="javascript:void(0)" class="item">{{ item.notice }}</a>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+        </div>
+        <!-- <el-alert
           title="公告"
           type="warning"
           close-text="知道了"
           :description="notice"
           show-icon
-        />
+        /> -->
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
@@ -56,7 +66,12 @@ export default {
       num: '',
       status: '',
       description: '',
-      notice: '文字说明文字说明文字说明文字说明文字说明文字说明'
+      notice: '文字说明文字说明文字说明文字说明文字说明文字说明',
+      systemMsg: [
+        { id: 1, title: '滚动公告1' },
+        { id: 2, title: '滚动公告2' },
+        { id: 3, title: '滚动公告3' }
+      ]
     }
   },
   computed: {
@@ -76,7 +91,7 @@ export default {
     },
     notice_msg() {
       getNotice().then(response => {
-        this.notice = response.data.notice
+        this.systemMsg = response.data.notice
       })
     },
     handleClose(done) {
@@ -100,4 +115,32 @@ export default {
     line-height: 46px;
   }
 }
+
+/*轮翻消息*/
+.bs-sysMsg {
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    color: #e6a23c;
+    background-color: #fdf6ec;
+    overflow: hidden;
+    opacity: 1;
+    align-items: center;
+    transition: opacity .2s;
+}
+.bs-sysMsg .msg__content {
+    display: table-cell;
+    padding: 0 8px;
+    width: 100%;
+}
+.bs-sysMsg .msg__content a.item {
+    color: #e6a23c;
+    font-size: 14px;
+    opacity: 0.75;
+}
+.bs-sysMsg .msg__content a.item:hover{text-decoration: underline;}
+
 </style>

@@ -31,3 +31,12 @@ export function updataNotice(data) {
     data
   })
 }
+
+// 删除公告
+export function deleteNotice(params) {
+  return request({
+    url: '/admin/deNotice',
+    method: 'get',
+    params
+  })
+}
