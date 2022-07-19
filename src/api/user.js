@@ -16,6 +16,15 @@ export function getInfo(data) {
   })
 }
 
+// 修改密码
+export function upPwd(data) {
+  return request({
+    url: '/user/upPwd',
+    method: 'post',
+    data
+  })
+}
+
 export function reg(data) {
   return request({
     url: '/reg?verifyCodeActual=' + data.verifyCodeActual,
