@@ -9,7 +9,8 @@
           <div class="msg__content">
             <el-carousel height="20px" direction="vertical" indicator-position="none" :autoplay="true">
               <el-carousel-item v-for="item in systemMsg" :key="item.id">
-                <a href="javascript:void(0)" class="item">{{ item.notice }}</a>
+                <button class="item" @click="showMsg(item.notice)">{{ item.notice }}</button>
+                <!-- <a href="javascript:void(0)" class="item">{{ item.notice }}</a> -->
               </el-carousel-item>
             </el-carousel>
           </div>
@@ -100,6 +101,11 @@ export default {
           done()
         })
         .catch(_ => {})
+    },
+    showMsg(msg) { // 展示公告
+      this.$alert(msg, '公告', {
+        confirmButtonText: '确定'
+      })
     }
   }
 }
@@ -136,11 +142,18 @@ export default {
     padding: 0 8px;
     width: 100%;
 }
-.bs-sysMsg .msg__content a.item {
+.bs-sysMsg .msg__content .item {
     color: #e6a23c;
     font-size: 14px;
     opacity: 0.75;
 }
-.bs-sysMsg .msg__content a.item:hover{text-decoration: underline;}
+.bs-sysMsg .msg__content button.item {
+    border: none;
+    background: #fdf6ec
+}
+// .bs-sysMsg .msg__content .item:hover{
+//   text-decoration: underline;
+
+// }
 
 </style>
