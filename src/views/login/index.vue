@@ -50,7 +50,7 @@
         <el-link type="primary" icon="el-icon-edit" style="margin-right:20px;" @click="dialogVisible = true">登录代表同意用户协议</el-link>
       </div>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
+      <el-button id="login" :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
       <el-button style="width:100%;margin-bottom:30px;margin-left:0" @click.native.prevent="reg">注册</el-button>
 
     </el-form>
