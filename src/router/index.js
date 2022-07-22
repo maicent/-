@@ -174,7 +174,7 @@ export const constantRoutes = [
 export const asyncRoutes = [{
   path: '/admin',
   component: Layout,
-  redirect: '/admin/user',
+  redirect: '/admin/index',
   name: '管理中心',
   meta: {
     title: '管理中心',
@@ -182,6 +182,14 @@ export const asyncRoutes = [{
     roles: ['admin']
   },
   children: [{
+    path: 'index',
+    name: '管理控制台',
+    component: () => import('@/views/admin/index'),
+    meta: {
+      title: '管理控制台',
+      icon: 'dashboard'
+    }
+  }, {
     path: 'user',
     name: '用户管理',
     component: () => import('@/views/admin/user/index'),

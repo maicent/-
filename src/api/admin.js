@@ -40,3 +40,12 @@ export function deleteNotice(params) {
     params
   })
 }
+
+// 控制台数据
+export function consoleDate(data) {
+  return request({
+    url: '/admin/console',
+    method: 'post',
+    data
+  })
+}
