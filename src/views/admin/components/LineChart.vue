@@ -64,7 +64,7 @@ export default {
     setOptions({ reg_date, reg_num, gacha_num } = {}) {
       this.chart.setOption({
         xAxis: {
-          data: reg_date.reverse(),
+          data: reg_date,
           boundaryGap: false,
           axisTick: {
             show: false
@@ -104,7 +104,7 @@ export default {
           },
           smooth: true,
           type: 'line',
-          data: reg_num.reverse(),
+          data: reg_num,
           animationDuration: 2800,
           animationEasing: 'cubicInOut'
         },
@@ -123,7 +123,7 @@ export default {
           },
           smooth: true,
           type: 'line',
-          data: gacha_num.reverse(),
+          data: gacha_num,
           animationDuration: 2800,
           animationEasing: 'quadraticOut'
         }]
