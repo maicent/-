@@ -93,10 +93,10 @@ export default {
             response.data.data[i].num = i - num
             recent.unshift(response.data.data[i])
             num = parseInt(i)
-            advance = parseInt(response.data.data.length - parseInt(i))
+            advance = parseInt(response.data.data.length - parseInt(i) - 1)
           }
         }
-        recent.unshift({ name: '？？？', pool: '？？？', num: '已垫' + advance, isnew: '？', ts: new Date().valueOf() / 1000 })
+        recent.unshift({ name: '你的下一个六星', pool: '？？？', num: '已垫' + advance, isnew: '？', ts: new Date().valueOf() / 1000 })
         this.list = recent
         this.listLoading = false
       })
