@@ -6,7 +6,7 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+    avatar: 'https://s2.loli.net/2022/07/25/6unp8aseL7UvJE4.jpg',
     roles: []
   }
 }
