@@ -7,20 +7,21 @@
         <navbar />
       </div>
       <app-main />
+      <Footer />
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
+import { Navbar, Sidebar, AppMain, Footer } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
-
 export default {
   name: 'Layout',
   components: {
     Navbar,
     Sidebar,
-    AppMain
+    AppMain,
+    Footer
   },
   mixins: [ResizeMixin],
   computed: {
