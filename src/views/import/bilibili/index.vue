@@ -23,6 +23,8 @@
           <iframe id="iframe" ref="iframe" src="https://web-api.hypergryph.com/account/info/ak-b" /><br>
           复制上方方框中"content":后面引号中的大串字符如：<br>
           <img src="@/assets/step/step2.png" class="rightulliimg"><br>
+          <el-link type="primary" href="https://web-api.hypergryph.com/account/info/ak-b" target="_blank">如果上方显示“Unauthorized”请点击此处</el-link><br>
+          （如果还是登录过期请在嘤脚官网重新登录）
         </el-card>
       </div>
       <div v-show="active == 3">

@@ -21,6 +21,8 @@
           <iframe id="iframe" ref="iframe" src="https://as.hypergryph.com/user/info/v1/token_by_cookie" /><br>
           复制上方方框中"token":后面引号中的大串字符如：<br>
           <img src="@/assets/import/import.png" class="rightulliimg"><br>
+          <el-link type="primary" href="https://as.hypergryph.com/user/info/v1/token_by_cookie" target="_blank">如果上方显示“登录过期”请点击此处</el-link><br>
+          （如果还是登录过期请在嘤脚官网重新登录）
         </el-card>
       </div>
       <div v-show="active == 3">
