@@ -23,7 +23,7 @@
           show-icon
         /> -->
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="8">
+      <el-col :xs="24" :sm="24" :lg="8" style="padding:0px 16px 16px">
         <div class="chart-wrapper">
           <pie />
         </div>
@@ -40,8 +40,10 @@
         <recent />
       </el-col>
     </el-row>
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-      <el-card class="box-card"><gachatable /></el-card>
+    <el-row style="background:#fff;padding:16px 0 0;margin-bottom:30px;">
+      <el-card class="box-card">
+        <gachatable />
+      </el-card>
     </el-row>
 
   </div>
