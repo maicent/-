@@ -11,7 +11,7 @@
           </div>
           <div v-show="!name">
             <el-button @click="login()">登录</el-button>
-            <el-button type="primary">注册</el-button>
+            <el-button type="primary" @click="reg()">注册</el-button>
           </div>
         </div>
       </el-menu>
@@ -96,6 +96,9 @@ export default {
     },
     login() {
       this.$router.push({ path: '/login' })
+    },
+    reg() {
+      this.$router.push({ path: '/reg' })
     }
   }
 }
