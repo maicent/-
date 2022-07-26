@@ -7,7 +7,7 @@
         <div class="right-btn">
           <div v-show="name">
             {{ name }}
-            <el-button type="primary">个人数据库</el-button>
+            <el-button type="primary" @click="dashboard()">个人数据库</el-button>
           </div>
           <div v-show="!name">
             <el-button @click="login()">登录</el-button>
@@ -99,6 +99,9 @@ export default {
     },
     reg() {
       this.$router.push({ path: '/reg' })
+    },
+    dashboard() {
+      this.$router.push({ path: '/dashboard' })
     }
   }
 }
