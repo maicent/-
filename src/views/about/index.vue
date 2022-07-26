@@ -29,7 +29,7 @@
           <i class="el-icon-tickets" />
           当前版本
         </template>
-        <el-tag size="small">V 2.0.1</el-tag>
+        <el-tag size="small">V 2.0.2</el-tag>
       </el-descriptions-item>
     </el-descriptions>
 
