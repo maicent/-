@@ -90,6 +90,14 @@ export const constantRoutes = [
         icon: 'el-icon-data-line'
       }
     }, {
+      path: 'export',
+      name: '抽卡记录导出',
+      component: () => import('@/views/statistic/export/index'),
+      meta: {
+        title: '抽卡记录导出',
+        icon: 'el-icon-folder-opened'
+      }
+    }, {
       path: 'count',
       name: '抽卡计算器',
       component: () => import('@/views/count/index'),
