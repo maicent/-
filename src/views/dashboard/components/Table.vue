@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" fit highlight-current-row :row-class-name="tableRowClassName">
+    <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" fit highlight-current-row>
       <el-table-column label="干员名称" align="center">
         <template slot-scope="scope">
           {{ scope.row.name }}
@@ -13,19 +13,14 @@
       </el-table-column>
       <el-table-column label="星级" align="center">
         <template slot-scope="scope">
-          {{ parseInt(scope.row.rarity)+1 |toChinese }}
+          <el-tag :type="tag_type(parseInt(scope.row.rarity))">{{ parseInt(scope.row.rarity) | toChinese }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="NEW" align="center">
         <template slot-scope="scope">
-          {{ scope.row.isnew }}
+          <el-rate v-model="scope.row.isnew" :max="1" disabled />
         </template>
       </el-table-column>
-      <!-- <el-table-column label="IP" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.ip }}
-        </template>
-      </el-table-column> -->
       <el-table-column align="center" prop="created_at" label="时间">
         <template slot-scope="scope">
           <i class="el-icon-time" />
@@ -42,7 +37,6 @@ import { selfGacha } from '@/api/gacha'
 // import { formateDate } from '@/utils/date'
 export default {
   filters: {
-
     formatDate: function(value) {
       const date = new Date(value * 1000)
       const y = date.getFullYear()
@@ -61,7 +55,7 @@ export default {
     toChinese(val) {
       const chin = ['一星', '二星', '三星', '四星', '五星', '六星', '七星', '八星', '九星', '十星']
       if (val <= 10) {
-        return chin[val - 1]
+        return chin[val]
       } else if (val <= 100) {
         if (val < 20) {
           return '十' + chin[(val % 10) - 1]
@@ -71,14 +65,6 @@ export default {
           return chin[Math.floor(val / 10) - 1] + '十' + chin[(val % 10) - 1]
         }
       }
-    },
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
-      }
-      return statusMap[status]
     }
   },
   data() {
@@ -108,11 +94,12 @@ export default {
       this.currentPage = val
       this.fetchData()
     },
-    tableRowClassName({ row }) {
-      if (row.rarity === '5') {
-        return 'warning-row'
-      }
-      return ''
+    tag_type(n) {
+      if (n === 5) return 'danger'
+      if (n === 4) return 'warning'
+      if (n === 3) return ''
+      if (n === 2) return 'info'
+      return 'info'
     }
   }
 }

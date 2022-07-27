@@ -5,7 +5,7 @@
         <span>最近六星</span>
         <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
       </div>
-      <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border fit highlight-current-row :row-class-name="tableRowClassName" max-height="280">
+      <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border fit highlight-current-row max-height="280">
         <el-table-column label="干员名称" align="center">
           <template slot-scope="scope">
             {{ scope.row.name }}
@@ -23,7 +23,7 @@
         </el-table-column>
         <el-table-column label="NEW" align="center">
           <template slot-scope="scope">
-            {{ scope.row.isnew }}
+            <el-rate v-model="scope.row.isnew" :max="1" disabled />
           </template>
         </el-table-column>
         <el-table-column align="center" prop="created_at" label="时间">
@@ -57,14 +57,6 @@ export default {
       let s = date.getSeconds()
       s = s < 10 ? ('0' + s) : s
       return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s
-    },
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
-      }
-      return statusMap[status]
     }
   },
   data() {
@@ -96,7 +88,7 @@ export default {
             advance = parseInt(response.data.data.length - parseInt(i) - 1)
           }
         }
-        recent.unshift({ name: '你的下一个六星', pool: '？？？', num: '已垫' + advance, isnew: '？', ts: new Date().valueOf() / 1000 })
+        recent.unshift({ name: '你的下一个六星', pool: '？？？', num: '已垫' + advance, isnew: 0, ts: new Date().valueOf() / 1000 })
         this.list = recent
         this.listLoading = false
       })
@@ -104,12 +96,6 @@ export default {
     handleCurrentChange(val) {
       this.currentPage = val
       this.fetchData()
-    },
-    tableRowClassName({ row }) {
-      if (row.isnew === 1) {
-        return 'warning-row'
-      }
-      return ''
     }
   }
 }
