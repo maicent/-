@@ -33,10 +33,10 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/index.html'
   },
   {
-    path: '/home',
+    path: '/index.html',
     component: () => import('@/views/index/index'),
     hidden: true
   },
@@ -61,6 +61,20 @@ export const constantRoutes = [
       meta: {
         title: '控制台',
         icon: 'dashboard'
+      }
+    }]
+  },
+  {
+    path: '/signin',
+    component: Layout,
+    redirect: '/signin',
+    children: [{
+      path: 'index',
+      name: '签到',
+      component: () => import('@/views/user/signin/index'),
+      meta: {
+        title: '签到',
+        icon: 'el-icon-date'
       }
     }]
   },

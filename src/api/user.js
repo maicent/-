@@ -48,3 +48,12 @@ export function getKaptcha(params) {
     params
   })
 }
+
+// 签到
+export function signin(data) {
+  return request({
+    url: 'user/sign',
+    method: 'post',
+    data
+  })
+}
