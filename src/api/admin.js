@@ -49,3 +49,12 @@ export function consoleDate(data) {
     data
   })
 }
+
+// 控制台数据
+export function upUser(data) {
+  return request({
+    url: '/admin/upuser',
+    method: 'post',
+    data
+  })
+}

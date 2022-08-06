@@ -1,5 +1,11 @@
 <template>
   <div class="app-container">
+    <div class="filter-container">
+      <el-input v-model="listQuery.user" placeholder="用户" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+        搜索
+      </el-button>
+    </div>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -16,6 +22,11 @@
       <el-table-column label="用户名" align="center">
         <template slot-scope="scope">
           {{ scope.row.user }}
+        </template>
+      </el-table-column>
+      <el-table-column label="积分" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.point }}
         </template>
       </el-table-column>
       <el-table-column label="IP" align="center">
@@ -47,30 +58,33 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination :hide-on-single-page="hide" :page-size="pageSize" layout="total,prev, pager, next" :total="total" :current-page="currentPage" @current-change="handleCurrentChange" />
+    <el-pagination :hide-on-single-page="hide" :page-size="listQuery.pageSize" layout="total,prev, pager, next" :total="total" :current-page="listQuery.pageNo" @current-change="handleCurrentChange" />
 
-    <el-dialog title="用户信息" :visible.sync="userInfo">
-      <el-form :model="form">
-        <el-form-item label="ID" label-width="120px">
+    <el-dialog title="用户信息" :visible.sync="userInfo" :fullscreen="true">
+      <el-form :model="form" label-position="left" label-width="auto">
+        <el-form-item label="ID">
           <el-input v-model="form.uid" autocomplete="off" :disabled="true" />
         </el-form-item>
-        <el-form-item label="用户名" label-width="120px">
+        <el-form-item label="用户名">
           <el-input v-model="form.user" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="密码" label-width="120px">
+        <el-form-item label="密码">
           <el-input v-model="form.pwd" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="积分">
+          <el-input v-model="form.point" autocomplete="off" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="userInfo = false">取 消</el-button>
-        <el-button type="primary" @click="userInfo = false">确 定</el-button>
+        <el-button type="primary" @click="updata_Info()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { userList } from '@/api/admin'
+import { userList, upUser } from '@/api/admin'
 
 export default {
   filters: {
@@ -92,7 +106,12 @@ export default {
       currentPage: 1,
       pageSize: 10,
       userInfo: false, // 用户个人信息弹出层
-      form: {}
+      form: {},
+      listQuery: {
+        pageNo: 1,
+        pageSize: 10,
+        user: ''
+      }
     }
   },
   created() {
@@ -100,16 +119,15 @@ export default {
   },
   methods: {
     fetchData() {
-      const data = { pageNo: this.currentPage, pageSize: this.pageSize }
       this.listLoading = true
-      userList(data).then(response => {
+      userList(this.listQuery).then(response => {
         this.total = Number(response.data.totalRecords)
         this.list = response.data.data
         this.listLoading = false
       })
     },
     handleCurrentChange(val) {
-      this.currentPage = val
+      this.listQuery.pageNo = val
       this.fetchData()
     },
     handleClick(row) {
@@ -118,6 +136,23 @@ export default {
     isFalse(d) {
       if (d) return true
       return false
+    },
+    handleFilter() {
+      this.listQuery.pageNo = 1
+      this.fetchData()
+    },
+    updata_Info() {
+      upUser(this.form).then(res => {
+        if (res.code === '200') {
+          this.$message({
+            message: '修改成功',
+            type: 'success'
+          })
+        } else {
+          this.$message.error('修改出错')
+        }
+      })
+      this.userInfo = false
     }
   }
 }
