@@ -1,11 +1,10 @@
 <template>
   <div>
-    <el-card class="box-card">
+    <el-card class="r-card" body-style="padding: 0;">
       <div slot="header" class="clearfix">
         <span>最近六星</span>
-        <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
       </div>
-      <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border fit highlight-current-row max-height="280">
+      <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" fit highlight-current-row max-height="315">
         <el-table-column label="干员名称" align="center">
           <template slot-scope="scope">
             {{ scope.row.name }}
@@ -101,12 +100,3 @@ export default {
 }
 </script>
 
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-</style>
