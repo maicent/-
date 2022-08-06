@@ -34,7 +34,7 @@
         </div>
         <div class="site-version">
           <span>当前版本：v<cite id="v" class="site-showv">2.0.2</cite></span>
-          <span><a href="https://gitee.com/maicent1/ark-db/commits/1a49a25722cc9e82dc68c3f101b2e7e6176df5e2?" rel="nofollow" target="_blank">更新日志</a></span>
+          <span><a href="https://gitee.com/maicent1/ark-db/commits/master" rel="nofollow" target="_blank">更新日志</a></span>
           <span>下载量：<em class="site-showdowns">…</em></span>
         </div>
       </div>
