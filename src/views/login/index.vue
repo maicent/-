@@ -25,7 +25,7 @@
           placeholder="密码"
           name="password"
           tabindex="2"
-          auto-complete="on"
+          autocomplete="on"
           @keyup.enter.native="handleLogin"
         />
         <span class="show-pwd" @click="showPwd">
@@ -138,6 +138,7 @@ export default {
             this.loading = false
           }).catch((x) => {
             this.loading = false
+            this.getImage()
             console.log(x)
           })
         } else {

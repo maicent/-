@@ -115,9 +115,11 @@ export default {
                 type: 'success'
               })
               this.$router.push({ path: '/login' })
+              this.getImage()
               this.loading = false
             } else {
               this.loading = false
+              this.getImage()
               console.log(response)
             }
           })
