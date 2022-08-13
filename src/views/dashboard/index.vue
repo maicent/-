@@ -89,7 +89,7 @@ export default {
   methods: {
     appraisalStatus() {
       appraisal().then(response => {
-        this.description = '平均' + response.data.num + '发一个六星干员,鉴定为' + response.data.status
+        this.description = '平均' + response.data.num.toFixed(1) + '发一个六星干员,鉴定为' + response.data.status
       })
     },
     notice_msg() {
