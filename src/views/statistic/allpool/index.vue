@@ -7,6 +7,15 @@
         :value="item.value"
       />
     </el-select>
+
+    <el-select v-model="upAgent" clearable filterable placeholder="请选择UP角色">
+      <el-option
+        v-for="(item,i) in list"
+        :key="i"
+        :value="item.name"
+      />
+    </el-select>
+
     <el-button class="filter-item" type="primary" icon="el-icon-search" @click="search()">
       搜索
     </el-button>
@@ -43,7 +52,7 @@ import { getPoolName, getPoolbyName } from '@/api/gacha'
 
 import * as echarts from 'echarts'
 require('echarts/theme/macarons')
-import resize from '../../dashboard/components/mixins/resize'
+import resize from '@/utils/resize'
 
 export default {
   mixins: [resize],
@@ -66,10 +75,12 @@ export default {
       options: [],
       chart: null,
       poolName: '',
+      upAgent: '', // UP干员名称
       probability: '在上方选择卡池以获取概率', // 卡池概率
       pie: [], // 饼图数据
       listLoading: true, // 表格加载
-      list: null // 表格数据
+      list: null, // 表格数据
+      allSix: null // 所有六星干员数量
     }
   },
   watch: {
@@ -78,6 +89,10 @@ export default {
       this.getData().then(res => {
         this.drawPie()
       })
+    },
+    // 监听UP干员是否发生变化
+    upAgent() {
+      this.getUP()
     }
   },
   mounted() {
@@ -103,12 +118,28 @@ export default {
     },
     async getData() {
       await getPoolbyName({ 'poolName': this.poolName }).then(res => {
-        this.probability = Number(res.data.data[0].value / res.data.data[1].value * 100).toFixed(1) + '%'
+        this.probability = '出金概率：' + Number(res.data.data[0].value / res.data.data[1].value * 100).toFixed(1) + '%'
+        this.allSix = res.data.data[0].value
         this.pie = res.data.data
         this.list = res.data.data[0].top3
         this.listLoading = false
       })
       return 0
+    },
+    // 计算抽到UP干员概率
+    getUP() {
+      let up = null
+      let upNum = 0
+      if (this.upAgent) {
+        for (const i in this.list) {
+          if (this.upAgent === this.list[i].name) {
+            upNum = this.list[i].num
+            break
+          }
+        }
+        up = Number(upNum / this.allSix * 100).toFixed(1) + '%'
+        this.probability += ' 抽到UP干员概率：' + up
+      }
     },
     initChart() {
       this.chart = echarts.init(document.getElementById('main'), 'macarons')
