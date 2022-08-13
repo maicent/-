@@ -1,7 +1,18 @@
 <template>
   <div>
     <div id="main" :class="className" :style="{height:height,width:width}" />
-
+    <el-dialog
+      title="6星历史记录"
+      :visible.sync="hiddenDialogCommon"
+      :width="dialogWidth"
+      @close="handleClose()"
+    >
+      <div v-for="(item, index) in poolDate" :key="index">
+        <span><font color="orange">{{ item.agent+' ' }}</font></span>
+        <sup><font color="blue">{{ item.isnew===1?'NEW':'' }}</font></sup>
+        {{ ' ('+item.poolName+')' }}
+      </div>
+    </el-dialog>
   </div>
 
 </template>
@@ -9,8 +20,9 @@
 <script>
 import * as echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
-import resize from '../../dashboard/components/mixins/resize'
-import { pool } from '@/api/gacha'
+import resize from '@/utils/resize'
+import { pool, getSelfPool } from '@/api/gacha'
+import { parseTime } from '@/utils'
 
 export default {
   mixins: [resize],
@@ -26,6 +38,10 @@ export default {
     height: {
       type: String,
       default: '600px'
+    },
+    dialogWidth: {
+      type: String,
+      default: '94%'
     }
   },
   data() {
@@ -33,16 +49,15 @@ export default {
       chart: null,
       xdatra: [],
       ydata: [],
-      sixdata: []
+      sixdata: [],
+      hiddenDialogCommon: false,
+      poolDate: []
     }
   },
   mounted() {
     this.getData().then(res => {
       this.initChart()
     })
-    // this.$nextTick(() => {
-    //   this.initChart()
-    // })
   },
   beforeDestroy() {
     if (!this.chart) {
@@ -61,9 +76,8 @@ export default {
       return 0
     },
     initChart() {
+      const _this = this
       this.chart = echarts.init(document.getElementById('main'), 'macarons')
-      console.log(this.sixdata)
-      console.log(this.ydata)
       this.chart.setOption({
         xAxis: {
           max: 'dataMax'
@@ -105,7 +119,35 @@ export default {
         animationEasing: 'linear',
         animationEasingUpdate: 'linear'
       })
+
+      this.chart.on('click', function(obj) {
+        _this.clickChart(obj)
+      })
+    },
+    // 图表点击事件
+    clickChart(obj) {
+      getSelfPool({ 'poolName': obj.name }).then(res => {
+        const recent = []
+        let num = 0
+        for (const i in res.data.data.reverse()) {
+          if (res.data.data[i].rarity === '5') {
+            res.data.data[i].num = i - num
+            recent.unshift({ 'agent': parseTime(res.data.data[i].ts) + '  [' + res.data.data[i].num + '] ' + res.data.data[i].name, 'isnew': res.data.data[i].isnew, 'poolName': res.data.data[i].pool })
+            num = parseInt(i)
+          }
+        }
+        this.poolDate = recent
+      }).then(this.hiddenDialogCommon = true)
+    },
+    // 弹窗关闭
+    handleClose(done) {
+
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+span {
+  line-height:30px
+}
+</style>

@@ -77,3 +77,12 @@ export function getPoolbyName(data) {
     data
   })
 }
+
+// 获取个人卡池数据
+export function getSelfPool(data) {
+  return request({
+    url: '/gacha/getSelfPoolDate',
+    method: 'post',
+    data
+  })
+}
