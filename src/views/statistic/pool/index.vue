@@ -1,5 +1,10 @@
 <template>
   <div>
+    <el-alert
+      title="点击柱状图可显示该卡池六星记录"
+      type="success"
+      show-icon
+    />
     <div id="main" :class="className" :style="{height:height,width:width}" />
     <el-dialog
       title="6星历史记录"
