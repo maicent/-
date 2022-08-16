@@ -86,3 +86,12 @@ export function getSelfPool(data) {
     data
   })
 }
+
+// 获取每日卡池概率
+export function getPoolbyDay(data) {
+  return request({
+    url: '/gacha/getPoolbyDay',
+    method: 'post',
+    data
+  })
+}

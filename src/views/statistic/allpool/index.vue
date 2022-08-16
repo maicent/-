@@ -20,7 +20,14 @@
       搜索
     </el-button>
 
-    <div id="main" :class="className" :style="{height:height,width:width}" />
+    <el-row :gutter="40" class="chart">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="main" :class="className" :style="{height:height,width:width}" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <line-chart :pool-name="poolName" />
+      </el-col>
+    </el-row>
 
     <el-alert
       title="卡池概率"
@@ -49,12 +56,15 @@
 
 <script>
 import { getPoolName, getPoolbyName } from '@/api/gacha'
-
+import LineChart from './components/LineChart'
 import * as echarts from 'echarts'
 require('echarts/theme/macarons')
 import resize from '@/utils/resize'
 
 export default {
+  components: {
+    LineChart
+  },
   mixins: [resize],
   props: {
     className: {
@@ -186,6 +196,9 @@ export default {
 }
 .showchart{
   margin-top: 20px;
+}
+.chart{
+  margin: 20px 0px 20px 0px;
 }
 </style>
 
