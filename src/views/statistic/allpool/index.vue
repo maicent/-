@@ -20,6 +20,13 @@
       搜索
     </el-button>
 
+    <el-alert
+      type="success"
+      :closable="false"
+      :description="probability"
+      class="alert"
+    />
+
     <el-row :gutter="40" class="chart">
       <el-col :xs="24" :sm="24" :lg="12">
         <div id="main" :class="className" :style="{height:height,width:width}" />
@@ -28,14 +35,6 @@
         <line-chart :pool-name="poolName" />
       </el-col>
     </el-row>
-
-    <el-alert
-      title="卡池概率"
-      type="success"
-      :closable="false"
-      :description="probability"
-      show-icon
-    />
 
     <div><h3>抽到的六星</h3></div>
     <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border fit highlight-current-row max-height="280">
@@ -194,11 +193,11 @@ export default {
 .filter-item{
   margin: 0px 0px 0px 10px
 }
-.showchart{
-  margin-top: 20px;
+.alert{
+  margin: 10px 0px 10px 0px;
 }
 .chart{
-  margin: 20px 0px 20px 0px;
+  margin: 20px 0px 10px 0px;
 }
 </style>
 
