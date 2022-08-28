@@ -142,7 +142,7 @@ export const constantRoutes = [
     name: '其他功能',
     meta: {
       title: '其他功能',
-      icon: 'el-icon-user'
+      icon: 'el-icon-postcard'
     },
     children: [{
       path: 'ranking',

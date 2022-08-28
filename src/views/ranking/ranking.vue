@@ -9,7 +9,7 @@
           :value="item.value"
         />
       </el-select>
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="partake()">
+      <el-button style="margin: 10px 20px 10px 20px;" type="primary" icon="el-icon-search" @click="partake()">
         参与排位
       </el-button>
 
