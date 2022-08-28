@@ -25,3 +25,30 @@ export function rankingDate(data) {
     data
   })
 }
+
+// 获取所有卡池列表
+export function poolList(params) {
+  return request({
+    url: '/other/poolList',
+    method: 'get',
+    params
+  })
+}
+
+// 编辑卡池列表
+export function editPool(data) {
+  return request({
+    url: '/other/editPool',
+    method: 'post',
+    data
+  })
+}
+
+// 获取卡池类型
+export function poolType(data) {
+  return request({
+    url: '/other/poolType',
+    method: 'post',
+    data
+  })
+}

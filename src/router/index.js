@@ -153,7 +153,15 @@ export const constantRoutes = [
         icon: 'el-icon-notebook-1'
       }
     }, {
-      path: 'index',
+      path: 'pool',
+      name: '卡池信息',
+      component: () => import('@/views/wiki/pool'),
+      meta: {
+        title: '卡池信息',
+        icon: 'el-icon-edit-outline'
+      }
+    }, {
+      path: 'sign',
       name: '签到',
       component: () => import('@/views/user/signin/index'),
       meta: {
