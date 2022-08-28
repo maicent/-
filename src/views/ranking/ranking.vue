@@ -45,7 +45,9 @@
           <template slot-scope="scope">
             <div align="left">
               <span v-if="scope.row[`${item}`] instanceof Array">
-                <span style="text-align: justify"><b>{{ scope.row[`${item}`][0] }}</b></span>
+                <span style="text-align: justify"><b>
+                  {{ checkUsername(scope.row[`${item}`][0])?scope.row[`${item}`][0].substring(0,3)+"****"+scope.row[`${item}`][0].substring(7): scope.row[`${item}`][0] }}
+                </b></span>
                 <br>
                 <span>本卡池抽取数量：{{ scope.row[`${item}`][1] }}</span>
                 <br>
@@ -148,6 +150,10 @@ export default {
         }
         this.tableData = Tdata
       })
+    },
+    checkUsername(username) {
+      var tel = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
+      return tel.test(username)
     }
   }
 }
