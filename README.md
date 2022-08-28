@@ -20,6 +20,8 @@
 
 - [x] 自动签到
 
+- [x] 非酋排行榜
+
 - [x] B服寻访数据导入
 
 - [x] 饼图星级分析
@@ -64,7 +66,7 @@ npm install --registry=https://registry.npm.taobao.org
 # 启动服务
 npm run dev
 
-在vue.config.js中的proxy中把本地后端接口改为线上后端接口 http://arkdb.maicent.top/api (后端会在后面再开源)
+在vue.config.js中的proxy中把本地后端接口改为线上后端接口 https://ak.mcsite.cn/api (后端会在后面再开源)
 ```
 
 浏览器访问 [http://localhost:9528](http://localhost:9528)

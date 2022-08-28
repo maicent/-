@@ -65,20 +65,6 @@ export const constantRoutes = [
     }]
   },
   {
-    path: '/signin',
-    component: Layout,
-    redirect: '/signin',
-    children: [{
-      path: 'index',
-      name: '签到',
-      component: () => import('@/views/user/signin/index'),
-      meta: {
-        title: '签到',
-        icon: 'el-icon-date'
-      }
-    }]
-  },
-  {
     path: '/statistic',
     component: Layout,
     redirect: '/statistic/pool',
@@ -146,6 +132,33 @@ export const constantRoutes = [
       meta: {
         title: 'B服导入',
         icon: 'form'
+      }
+    }]
+  },
+  {
+    path: '/other',
+    component: Layout,
+    redirect: '/other/ranking',
+    name: '其他功能',
+    meta: {
+      title: '其他功能',
+      icon: 'el-icon-user'
+    },
+    children: [{
+      path: 'ranking',
+      name: '非酋排行榜',
+      component: () => import('@/views/ranking/ranking'),
+      meta: {
+        title: '非酋排行榜',
+        icon: 'el-icon-notebook-1'
+      }
+    }, {
+      path: 'index',
+      name: '签到',
+      component: () => import('@/views/user/signin/index'),
+      meta: {
+        title: '签到',
+        icon: 'el-icon-date'
       }
     }]
   },
