@@ -1,7 +1,6 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
       <div class="title-container">
         <h3 class="title">明日方舟数据库 登录</h3>
       </div>
@@ -10,7 +9,15 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input ref="username" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1" auto-complete="on" />
+        <el-input
+          ref="username"
+          v-model="loginForm.username"
+          placeholder="用户名"
+          name="username"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
       </el-form-item>
 
       <el-form-item prop="password">
@@ -29,12 +36,14 @@
           @keyup.enter.native="handleLogin"
         />
         <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          <svg-icon
+            :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
+          />
         </span>
       </el-form-item>
 
       <el-form-item prop="verifyCodeActual">
-        <el-popover
+        <!-- <el-popover
           placement="bottom"
           width="144"
           title="点击更换图片"
@@ -43,16 +52,29 @@
           <img id="img-vcode" :src="src" @click="getImage">
 
           <el-input slot="reference" ref="verifyCodeActual" v-model="loginForm.verifyCodeActual" placeholder="请输入验证码" name="verifyCodeActual" type="text" tabindex="1" auto-complete="off" />
-        </el-popover>
+          <img id="img-vcode" :src="src" @click="getImage">
+        </el-popover> -->
+        <span class="svg-container">
+          <i class="el-icon-warning" />
+        </span>
+        <el-input
+          ref="verifyCodeActual"
+          v-model="loginForm.verifyCodeActual"
+          placeholder="请输入验证码"
+          name="verifyCodeActual"
+          type="text"
+          tabindex="3"
+          auto-complete="off"
+        />
+        <img id="img-vcode" :src="src" class="verifyImg" @click="getImage">
       </el-form-item>
 
       <div class="tips">
-        <el-link type="primary" icon="el-icon-edit" style="margin-right:20px;" @click="dialogVisible = true">登录代表同意用户协议</el-link>
+        <el-link type="primary" icon="el-icon-edit" style="margin-right: 20px" @click="dialogVisible = true">登录代表同意用户协议</el-link>
       </div>
 
-      <el-button id="login" :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
-      <el-button style="width:100%;margin-bottom:30px;margin-left:0" @click.native.prevent="reg">注册</el-button>
-
+      <el-button id="login" :loading="loading" type="primary" style="width: 100%; margin-bottom: 30px" @click.native.prevent="handleLogin">登录</el-button>
+      <el-button style="width: 100%; margin-bottom: 30px; margin-left: 0" @click.native.prevent="reg">注册</el-button>
     </el-form>
     <el-dialog title="用户协议" :visible.sync="dialogVisible" width="40%" :before-close="handleClose">
       <span>1、本网站仅为用户自愿在本站存储数据，用户行为与本站无关</span><br>
@@ -63,12 +85,12 @@
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
-
   </div>
 </template>
 
 <script>
 // import { getKaptcha } from '@/api/user'
+
 export default {
   name: 'Login',
   data() {
@@ -93,8 +115,12 @@ export default {
         verifyCodeActual: ''
       },
       loginRules: {
-        verifyCodeActual: [{ required: true, trigger: 'blur', validator: validateCode }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        verifyCodeActual: [
+          { required: true, trigger: 'blur', validator: validateCode }
+        ],
+        password: [
+          { required: true, trigger: 'blur', validator: validatePassword }
+        ]
       },
       loading: false,
       passwordType: 'password',
@@ -112,11 +138,13 @@ export default {
     }
   },
   created() {
-    this.getImage()// 获取验证码
+    this.getImage() // 获取验证码
   },
   methods: {
-    getImage() { // 获取验证码
-      this.src = process.env.VUE_APP_BASE_API + '/kaptcha?ts=' + new Date().valueOf()
+    getImage() {
+      // 获取验证码
+      this.src =
+        process.env.VUE_APP_BASE_API + '/kaptcha?ts=' + new Date().valueOf()
     },
     showPwd() {
       if (this.passwordType === 'password') {
@@ -129,18 +157,21 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then((data) => {
-            console.log(this.redirect)
-            this.$router.push({ path: this.redirect || '/dashboard/index' })
-            this.loading = false
-          }).catch((x) => {
-            this.loading = false
-            this.getImage()
-            console.log(x)
-          })
+          this.$store
+            .dispatch('user/login', this.loginForm)
+            .then((data) => {
+              console.log(this.redirect)
+              this.$router.push({ path: this.redirect || '/dashboard/index' })
+              this.loading = false
+            })
+            .catch((x) => {
+              this.loading = false
+              this.getImage()
+              console.log(x)
+            })
         } else {
           console.log('error submit!!')
           return false
@@ -155,12 +186,11 @@ export default {
     },
     handleClose(done) {
       this.$confirm('确认关闭？')
-        .then(_ => {
+        .then((_) => {
           done()
         })
-        .catch(_ => {})
+        .catch((_) => {})
     }
-
   }
 }
 </script>
@@ -169,8 +199,8 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#fff;
+$bg: #283443;
+$light_gray: #fff;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -213,13 +243,14 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
 
 .login-container {
   min-height: 100%;
   width: 100%;
+
   background-color: $bg;
   overflow: hidden;
 
@@ -273,5 +304,11 @@ $light_gray:#eee;
     cursor: pointer;
     user-select: none;
   }
+}
+.verifyImg {
+  position: absolute;
+  right: 0;
+  height: 90%;
+  top: 3px;
 }
 </style>
