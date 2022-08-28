@@ -13,7 +13,7 @@
         参与排位
       </el-button>
 
-      <el-table :data="tableData" style="width: 100%" :cell-style="{ textAlign: 'center' }">
+      <el-table v-if="hackReset" :data="tableData" style="width: 100%" :cell-style="{ textAlign: 'center' }">
         <el-table-column type="index" align="center" :resizable="false" label="排名" width="100">
           <template slot-scope="scope" style="position: relative; width: 160px; height: 80px;">
             <span v-if="scope.$index+1 == 1">
@@ -38,8 +38,9 @@
         <el-table-column v-for="(item,key) in pankingPoolName" :key="item" width="180" :prop="item" :label="item" align="left">
           <template slot="header">
             <span style="font-weight: bold">{{ pankingPoolName[key] }}</span>
-            <span v-if="columnDateType[key] === '限定池'" style="border-color: #409EFF;color: #409EFF;border-style: solid;border-width: thin">{{ columnDateType[key] }}</span>
-            <span v-if="columnDateType[key] === '常驻池'" style="border-color: #13ce66;color: #13ce66;border-style: solid;border-width: thin">{{ columnDateType[key] }}</span>
+            <span v-if="columnDateType[key] === '限定池'" style="border-color: #f56c6c;color: #f56c6c;border-style: solid;border-width: thin">{{ columnDateType[key] }}</span>
+            <span v-if="columnDateType[key] === '轮换池'" style="border-color: #13ce66;color: #13ce66;border-style: solid;border-width: thin">{{ columnDateType[key] }}</span>
+            <span v-if="columnDateType[key] === 'UP池'" style="border-color: #409EFF;color: #409EFF;border-style: solid;border-width: thin">{{ columnDateType[key] }}</span>
           </template>
           <template slot-scope="scope">
             <div align="left">
@@ -76,15 +77,16 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getPoolName } from '@/api/gacha'
-import { partakeRanking, allRankingPool, rankingDate } from '@/api/other'
+import { partakeRanking, allRankingPool, rankingDate, poolType } from '@/api/other'
 export default {
   inject: ['reload'],
   data() {
     return {
+      hackReset: false,
       allPoolName: [],
       pool: '',
       pankingPoolName: '', // 表头
-      columnDateType: ['限定池'], // TODO:判断限定池
+      columnDateType: ['限定池'],
       tableData: [{
         '巨斧与笔尖': ['1', 19222, '-1.27%'],
         '常驻标准寻访': ['1', 19469, '-6.51%']
@@ -97,6 +99,7 @@ export default {
   mounted() {
     this.getAllRankingPool().then(res => {
       this.getRankingDate()
+      this.getPoolType()
     }) // 获取表头
     this.getItem() // 获取卡池名称
   },
@@ -104,6 +107,13 @@ export default {
     getItem() { // 获取所有卡池名称
       getPoolName().then(response => {
         this.allPoolName = response.data.name
+      })
+    },
+    async getPoolType() {
+      await poolType({ 'poolName': this.pankingPoolName }).then(res => {
+        this.columnDateType = res.data.type
+
+        this.hackReset = true
       })
     },
     partake() { // 参与排位
@@ -124,6 +134,7 @@ export default {
           return item.value
         })
       })
+
       return 0
     },
     getRankingDate() {
