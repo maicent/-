@@ -18,15 +18,16 @@
 
       <div v-show="active == 2">
         <el-card shadow="hover">
-          <iframe id="iframe" ref="iframe" src="https://as.hypergryph.com/user/info/v1/token_by_cookie" /><br>
-          复制上方方框中"token":后面引号中的大串字符如：<br>
-          <img src="@/assets/import/import.png" class="rightulliimg"><br>
-          <el-link type="primary" href="https://as.hypergryph.com/user/info/v1/token_by_cookie" target="_blank">如果上方显示“登录过期”请点击此处</el-link><br>
-          （如果还是登录过期请在嘤脚官网重新登录）
+          <el-link type="primary" href="https://web-api.hypergryph.com/account/info/hg" target="_blank">如果下方显示“登录过期”请点击此处</el-link><br>
+          <iframe id="iframe" ref="iframe" src="https://web-api.hypergryph.com/account/info/hg" /><br>
+          复制上方方框中"content":后面引号中的大串字符如：<br>
+          <img src="@/assets/step2-1.png" class="rightulliimg"><br>
+
+          （如果还是登录过期请在嘤脚官网重新登录<el-link type="primary" href="https://ak.hypergryph.com/user" target="_blank">https://ak.hypergryph.com/user</el-link>）
         </el-card>
       </div>
       <div v-show="active == 3">
-        <el-form-item label="刚才复制的token">
+        <el-form-item label="刚才复制的content">
           <el-input v-model="form.token" placeholder="请输入刚才复制的内容" />
         </el-form-item>
       </div>
