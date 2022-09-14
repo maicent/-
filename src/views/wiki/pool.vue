@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { poolList, editPool } from '@/api/other'
+import { poolList, editPool, updataPool } from '@/api/other'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -97,6 +97,14 @@ export default {
     handleFilter() {
       this.listQuery.pageNo = 1
       this.fetchData()
+    },
+    partake() {
+      updataPool().then(res => {
+        this.$message({
+          message: '更新成功',
+          type: 'success'
+        })
+      })
     }
     // TODO:UP干员信息编辑
   }

@@ -52,3 +52,13 @@ export function poolType(data) {
     data
   })
 }
+
+// 更新卡池（管理员）
+export function updataPool(data) {
+  return request({
+    url: '/other/updataPool',
+    method: 'post',
+    data
+  })
+}
+
