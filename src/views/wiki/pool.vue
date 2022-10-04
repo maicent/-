@@ -46,7 +46,7 @@
       </el-table-column>
       <el-table-column align="center" label="操作" fixed="right">
         <template slot-scope="scope">
-          <el-button type="primary" @click="handleClick(scope.row)">查看</el-button>
+          <el-button type="primary" @click="handleClick(scope.row)">更新</el-button>
         </template>
       </el-table-column>
     </el-table>

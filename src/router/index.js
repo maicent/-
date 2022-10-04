@@ -153,14 +153,6 @@ export const constantRoutes = [
         icon: 'el-icon-notebook-1'
       }
     }, {
-      path: 'pool',
-      name: '卡池信息',
-      component: () => import('@/views/wiki/pool'),
-      meta: {
-        title: '卡池信息',
-        icon: 'el-icon-edit-outline'
-      }
-    }, {
       path: 'sign',
       name: '签到',
       component: () => import('@/views/user/signin/index'),
@@ -266,6 +258,26 @@ export const asyncRoutes = [{
       icon: 'tree'
     }
   }]
+}, {
+  path: '/edit',
+  component: Layout,
+  redirect: '/edit/index',
+  name: '编辑中心',
+  meta: {
+    title: '管理中心',
+    icon: 'el-icon-s-help',
+    roles: ['admin', 'editer']
+  },
+  children: [
+    {
+      path: 'pool',
+      name: '卡池信息',
+      component: () => import('@/views/wiki/pool'),
+      meta: {
+        title: '卡池信息',
+        icon: 'el-icon-edit-outline'
+      }
+    }]
 },
 // 404 page must be placed at the end !!!
 {
