@@ -11,7 +11,7 @@
       :data="list"
       element-loading-text="Loading"
     >
-      <el-table-column label="用户名" align="center">
+      <el-table-column label="卡池名称" align="center">
         <template slot-scope="scope">
           {{ scope.row.pool }}
         </template>
@@ -29,9 +29,24 @@
           <!-- {{ scope.row.state }} -->
         </template>
       </el-table-column>
-      <el-table-column label="UP干员" align="center">
+      <el-table-column label="UP六星干员" align="center">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.up" placeholder="请输入UP干员" />
+          <el-input v-model="scope.row.up6" placeholder="请输入UP干员，用“|”间隔" />
+        </template>
+      </el-table-column>
+      <el-table-column label="UP五星干员" align="center">
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.up5" placeholder="请输入UP干员，用“|”间隔" />
+        </template>
+      </el-table-column>
+      <el-table-column label="UP四星干员" align="center">
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.up4" placeholder="请输入UP干员，用“|”间隔" />
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="操作" fixed="right">
+        <template slot-scope="scope">
+          <el-button type="primary" @click="handleClick(scope.row)">查看</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -91,7 +106,10 @@ export default {
     },
     stateChange(pid, state) {
       editPool({ 'pid': pid, 'state': state, 'type': 'state' }).then(res => {
-
+        this.$message({
+          message: '修改成功',
+          type: 'success'
+        })
       })
     },
     handleFilter() {
@@ -105,8 +123,22 @@ export default {
           type: 'success'
         })
       })
+    },
+    handleClick(val) {
+      const data = {
+        'pid': val.pid,
+        'up6': val.up6,
+        'up5': val.up5,
+        'up4': val.up4,
+        'type': 'up'
+      }
+      editPool(data).then(res => {
+        this.$message({
+          message: '修改成功',
+          type: 'success'
+        })
+      })
     }
-    // TODO:UP干员信息编辑
   }
 }
 </script>
