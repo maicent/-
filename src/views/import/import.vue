@@ -21,8 +21,7 @@
           <el-link type="primary" href="https://web-api.hypergryph.com/account/info/hg" target="_blank">如果下方显示“登录过期”请点击此处</el-link><br>
           <iframe id="iframe" ref="iframe" src="https://web-api.hypergryph.com/account/info/hg" /><br>
           复制上方方框中"content":后面引号中的大串字符如：<br>
-          <img src="@/assets/step2-1.png" class="rightulliimg"><br>
-
+          <img src="@/assets/step/step2-1.png" class="rightulliimg"><br>
           （如果还是登录过期请在嘤脚官网重新登录<el-link type="primary" href="https://ak.hypergryph.com/user" target="_blank">https://ak.hypergryph.com/user</el-link>）
         </el-card>
       </div>
