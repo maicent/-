@@ -51,6 +51,30 @@
       </div>
       <div class="introduction_img wap_w100 wap_mt15"><img class="disblock w100" src="@/assets/img/preview1.png"></div>
     </div>
+
+    <div class="introduction mt_100 disflex flex_lmr flex_center wap_disblock" style="flex-direction: row-reverse;">
+      <div class="introduction_txt wap_w100">
+        <h1 class="title">每日出金概率&全站卡池统计</h1>
+        <i class="line" />
+        <div class="txt text color666">
+          展现所有用户的抽卡概率，以及每日出金概率的统计图
+          <el-link type="primary" href="/statistic/allpool" target="_blank">&gt;&gt;查看</el-link>
+        </div>
+      </div>
+      <div class="introduction_img wap_w100 wap_mt15"><img class="disblock w100" src="@/assets/img/preview2.png"></div>
+    </div>
+
+    <div class="introduction mt_100 disflex flex_lmr flex_center wap_disblock">
+      <div class="introduction_txt wap_w100">
+        <h1 class="title">抽卡数据导出</h1>
+        <i class="line" />
+        <div class="txt text color666">
+          如果博士想对自己的数据有更深入的分析，本站还提供将自己所有的抽卡数据导出为xls表格的功能
+          <el-link type="primary" href="/statistic/export" target="_blank">&gt;&gt;查看</el-link>
+        </div>
+      </div>
+      <div class="introduction_img wap_w100 wap_mt15"><img class="disblock w100" src="@/assets/img/preview3.png"></div>
+    </div>
     <!--网站底部-->
     <div class="footer">
       <span style="margin-right: 8px;">明日方舟抽卡数据库 ©2022 麦创软件设计工作室</span>
