@@ -1,10 +1,8 @@
 <template>
   <div class="app-container">
-    <div v-if="roles.includes('admin')" class="filter-container">
-      <el-button style="margin: 10px 20px 10px 20px;" type="primary" @click="partake()">
-        一键导入
-      </el-button>
-    </div>
+    <el-button style="margin: 10px 20px 10px 20px;" type="primary" @click="partake()">
+      一键导入
+    </el-button>
 
     <el-table
       v-loading="listLoading"
@@ -57,7 +55,6 @@
 
 <script>
 import { poolList, editPool, updataPool } from '@/api/other'
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -66,14 +63,14 @@ export default {
       hide: true,
       total: 10,
       options: [{
-        value: 'UP池',
-        label: 'UP池'
+        value: '标准寻访',
+        label: '标准寻访'
       }, {
-        value: '轮换池',
-        label: '轮换池'
+        value: '定向寻访',
+        label: '定向寻访'
       }, {
-        value: '限定池',
-        label: '限定池'
+        value: '限定寻访',
+        label: '限定寻访'
       }],
       userInfo: false, // 用户个人信息弹出层
       form: {},
@@ -84,9 +81,6 @@ export default {
         pool: ''
       }
     }
-  },
-  computed: {
-    ...mapGetters(['roles'])
   },
   created() {
     this.fetchData()

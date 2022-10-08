@@ -264,7 +264,7 @@ export const asyncRoutes = [{
   redirect: '/edit/index',
   name: '编辑中心',
   meta: {
-    title: '管理中心',
+    title: '编辑中心',
     icon: 'el-icon-s-help',
     roles: ['admin', 'editer']
   },
